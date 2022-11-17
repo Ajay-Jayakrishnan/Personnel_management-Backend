@@ -9,7 +9,6 @@ const User = mongoose.model('User', {
     userName: String,
     passWord: String,
     employees: []
-    
    
 }
 )

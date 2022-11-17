@@ -45,7 +45,7 @@ const login = (logData) => {
             return {
 
                 statusCode: 200,
-                message: "user exist",
+                message: `Logged in as ${name1}`,
                 name1,
                 id,
                 token
@@ -96,6 +96,7 @@ const empdata = (uid) => {
         }
     })
 }
+//function to delete an employee from array
 const deleteemp = (deldata) => {
     return db.User.updateOne({ userName: deldata.employer }, { $pull: { employees: { empID: deldata.employee } } }).then(result => {
         if (result) {
@@ -115,6 +116,8 @@ const deleteemp = (deldata) => {
 
 
 }
+
+//function to fill update form with previous values
 const updateData = (updata) => {
     return db.User.findOne({ userName: updata.employer }, { employees: { $elemMatch: { empID: updata.employee } } }).then((result) => {
         if (result) {
@@ -136,9 +139,30 @@ const updateData = (updata) => {
     })
 
 }
+// function to delete an account
 
+const deleteEmployer = (uid) =>{
+    let x = uid
+   return db.User.findOneAndDelete({userName:uid}).then(result=>{
+        if(result){
+       return{
+        message:`${x} deleted`,
+        statusCode:200
+       }
+        }
+    })
+}
+
+//function to update an employee data
+const updateEmployee = (search,upvalue) =>{
+    
+    console.log(search);
+    
+
+
+}
 
 
 module.exports = {
-    register, login, addemployee, empdata, deleteemp, updateData
+    register, login, addemployee, empdata, deleteemp, updateData, deleteEmployer,updateEmployee
 }

@@ -55,6 +55,15 @@ service.updateData(req.body).then((result)=>{
 })
 })
 
+app.delete('/delAc/:uid',(req,res)=>{
+  service.deleteEmployer(req.params.uid).then((result)=>{
+    res.status(result.statusCode).json(result)
+ })
+})
+app.put('/updateEmployee/employer/:emid/employee/:empid',(req,res)=>{
+    service.updateEmployee(req.params,req.body)
+})
+
 
 
 
